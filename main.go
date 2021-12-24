@@ -13,11 +13,6 @@ func main() {
 
 	app.Flags = []cli.Flag{
 		&cli.StringFlag{
-			Name:  "lang",
-			Value: "english",
-			Usage: "Language for the greeting",
-		},
-		&cli.StringFlag{
 			Name:  "instance",
 			Value: "",
 			Usage: "For multiple instances of the command",
@@ -35,6 +30,11 @@ func main() {
 			Name:   "logout",
 			Usage:  "logout",
 			Action: cmd.Logout,
+		},
+		{
+			Name:   "listen",
+			Usage:  "start processing notifications",
+			Action: cmd.Listen,
 		},
 	}
 

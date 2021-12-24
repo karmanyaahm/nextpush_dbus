@@ -5,6 +5,7 @@ import (
 
 	"github.com/godbus/dbus/v5"
 	keyring "github.com/ppacher/go-dbus-keyring"
+	"unifiedpush.org/go/nextpush_dbus/config"
 	"unifiedpush.org/go/nextpush_dbus/dbusutil"
 )
 
@@ -105,10 +106,10 @@ func (store ncPasswordStorage) DeletePwd(bus *dbus.Conn) (err error) {
 
 	return
 }
-func GetCreds(instance string) (server, username, password string, err error) {
+func GetCreds() (server, username, password string, err error) {
 	//TODO cache credentials so each time it doesn't call to dbus
 
-	store, err := NewNCPasswordStorage(instance)
+	store, err := NewNCPasswordStorage(config.CliCtx.String("instance"))
 	if err != nil {
 		return
 	}
