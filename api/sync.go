@@ -11,6 +11,8 @@ import (
 )
 
 type Message struct {
+	// ignore in public api
+	Type    string
 	Token   string
 	Message string
 }
@@ -29,11 +31,15 @@ func Sync(deviceId string, ans chan Message) (err error) {
 			out := Message{}
 			b, _ := io.ReadAll(state.Data)
 
-			if string(b) == `{"type":"start"}` {
+			err = json.Unmarshal(b, &out)
+			if out.Type == "start" {
+				continue
+			} else if out.Type == "warning" {
+				utils.Log.Infoln("WARNING", out.Message)
+				continue
+			} else if out.Type == "" {
 				continue
 			}
-
-			err = json.Unmarshal(b, &out)
 
 			m, _ := base64.StdEncoding.DecodeString(out.Message)
 			out.Message = string(m)
