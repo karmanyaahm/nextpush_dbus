@@ -46,7 +46,7 @@ func Listen(ctx *cli.Context) error {
 	go sendMsgtoApp(store, messages, dbus)
 
 	for {
-		fmt.Println("Syncing...")
+		utils.Log.Infoln("Syncing...")
 		fmt.Println(*id)
 		err = api.Sync(*id, messages)
 		if err != nil {
