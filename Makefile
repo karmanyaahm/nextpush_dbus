@@ -1,6 +1,6 @@
 build-local:
 	go build -o nextpush_dbus
-test:
+test: build-local
 	go test ./...
 
 build-docker:
