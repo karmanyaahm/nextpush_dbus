@@ -20,6 +20,6 @@ require (
 	gopkg.in/ini.v1 v1.63.1 // indirect
 	gorm.io/driver/sqlite v1.1.5 // indirect
 	gorm.io/gorm v1.21.15 // indirect
-	unifiedpush.org/go/np2p_dbus v0.2.0 // indirect
+	unifiedpush.org/go/np2p_dbus v0.2.3-0.20220403043543-2d675db81d7e // indirect
 	zgo.at/errors v1.1.0 // indirect
 )

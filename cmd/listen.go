@@ -65,10 +65,10 @@ func Listen(ctx *cli.Context) error {
 func sendMsgtoApp(st store.Storage, messages chan api.Message, dbus *distributor.DBus) {
 	for {
 		m := <-messages
-		utils.Log.Debugln(m.Token, m.Message)
+		utils.Log.Debugln(m.Token, m.DecodedMessage)
 		conn := st.GetConnectionbyPublic(m.Token)
 
-		_ = dbus.NewConnector(conn.AppID).Message(conn.AppToken, string(m.Message), "")
+		_ = dbus.NewConnector(conn.AppID).Message(conn.AppToken, m.DecodedMessage, "")
 
 	}
 }

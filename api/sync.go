@@ -12,9 +12,10 @@ import (
 
 type Message struct {
 	// ignore in public api
-	Type    string
-	Token   string
-	Message string
+	Type           string
+	Token          string
+	Message        string
+	DecodedMessage []byte
 }
 
 func Sync(deviceId string, ans chan Message) (err error) {
@@ -42,9 +43,9 @@ func Sync(deviceId string, ans chan Message) (err error) {
 			}
 
 			m, _ := base64.StdEncoding.DecodeString(out.Message)
-			out.Message = string(m)
+			out.DecodedMessage = m
 
-			utils.Log.Debugln("MESSAGE", string(b), out.Token, out.Message)
+			utils.Log.Debugln("MESSAGE", string(b), out.Token, out.DecodedMessage)
 			ans <- out
 
 			if !opened {
